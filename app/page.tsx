@@ -1,103 +1,549 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { ComboboxDemo } from "@/components/Combobox";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog } from "@/components/ui/dialog";
+import {
+  ArrowDown,
+  ArrowUp,
+  Search,
+  House,
+  HelpCircle,
+  Zap,
+  ShoppingCart,
+  Share,
+  Pencil,
+  Menu,
+  ChartLine,
+  Lightbulb,
+  Users,
+  Copy,
+  Plus,
+  TrendingUpIcon,
+  TrendingDownIcon,
+} from "lucide-react";
+import { useState } from "react";
+import { Label } from "@radix-ui/react-label";
+
+import { TrendingUp } from "lucide-react";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { SectionCards } from "@/components/section-cards";
+import { Badge } from "@/components/ui/badge";
+const chartData = [
+  { month: "January", desktop: 186 },
+  { month: "February", desktop: 305 },
+  { month: "March", desktop: 237 },
+  { month: "April", desktop: 73 },
+  { month: "May", desktop: 209 },
+  { month: "June", desktop: 214 },
+];
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+} satisfies ChartConfig;
+
+export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState("AUTOMATIONS");
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <div className="relative w-48 bg-gray-100 border-r border-gray-200">
+        <div className="flex flex-col h-full">
+          <div className="h-24 p-4 flex items-center gap-4 border-b border-gray-300">
+            <div className="w-12 h-12 bg-gray-200 rounded-full" />
+            <h1 className=" font-bold">XM FITNESS</h1>
+          </div>
+          {/* Menu items */}
+          {[
+            { desc: "HOME", icon: House },
+            { desc: "SALES", icon: ShoppingCart },
+            { desc: "ANALYTICS", icon: ChartLine },
+            { desc: "BOOST", icon: ArrowUp },
+            { desc: "AUTOMATIONS", icon: Zap },
+            { desc: "CMS", icon: Pencil },
+            { desc: "TEAM", icon: Users },
+            { desc: "FAQ'S", icon: Lightbulb },
+            { desc: "SUPPORT", icon: HelpCircle },
+
+            { desc: "MENU", icon: Menu },
+          ].map((item) => (
+            <button
+              key={item.desc}
+              className={`relative z-10 py-3 font-bold flex pl-4 gap-2 items-center text-center ${
+                activeTab === item.desc
+                  ? "bg-blue-500 text-white"
+                  : "text-gray-900"
+              }`}
+              onClick={() => setActiveTab(item.desc)}
+            >
+              <item.icon /> <p>{item.desc}</p>
+            </button>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Main content */}
+      <div className="flex-1 p-6">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-10">
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center mr-3">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="w-5 h-5"
+                stroke="currentColor"
+              >
+                <path
+                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-black">
+              WELCOME TO YOUR DASHBOARD JOSH.
+            </h1>
+          </div>
+
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="SEARCH"
+              className="pl-4 pr-10 py-2 w-64 rounded-full border border-gray-300 focus:outline-none"
+            />
+            <button className="absolute right-3 top-1/2 -translate-y-1/2">
+              <Search className="w-5 h-5 text-gray-500" />
+            </button>
+          </div>
+        </div>
+
+        {/* Marketing Tools Section */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2 uppercase">
+            Your Key Stats for the <ComboboxDemo />
+          </h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+
+          <div className="flex items-center gap-4 text-lg font-medium ml-2">
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>Site Sessions</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  150
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingDownIcon className="size-3" />
+                    -11%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending Down this month{" "}
+                  <TrendingDownIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground">
+                  Sessions for the last month.
+                </div>
+              </CardFooter>
+            </Card>
+
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>Form Submissions</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  150
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingDownIcon className="size-3" />
+                    -50.5%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending Down this month{" "}
+                  <TrendingDownIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground">
+                  Form Submissions for the last month.
+                </div>
+              </CardFooter>
+            </Card>
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>Vistors</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  327
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingUpIcon className="size-3" />
+                    +5%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending up this month <TrendingUpIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground">
+                  Visitors for the last month.
+                </div>
+              </CardFooter>
+            </Card>
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>Joined</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  13
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingDownIcon className="size-3" />
+                    -2%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending up this month <TrendingUpIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground">
+                  Joined for the last month.
+                </div>
+              </CardFooter>
+            </Card>
+          </div>
+        </div>
+        <div className="mb-8">
+          <ChartAreaInteractive />
+        </div>
+        {/* Posting Section */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">SALES</h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <div className="flex items-center gap-4 text-lg font-medium ml-2">
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <p>XM FITNESS COURSE</p>{" "}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">
+                        <Share />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Share link</DialogTitle>
+                        <DialogDescription>
+                          Anyone who has this link will be able to view this.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="flex items-center space-x-2">
+                        <div className="grid flex-1 gap-2">
+                          <Label htmlFor="link" className="sr-only">
+                            Link
+                          </Label>
+                          <Input
+                            id="link"
+                            defaultValue="https://ui.shadcn.com/docs/installation"
+                            readOnly
+                          />
+                        </div>
+                        <Button type="submit" size="sm" className="px-3">
+                          <span className="sr-only">Copy</span>
+                          <Copy />
+                        </Button>
+                      </div>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                          <Button type="button" variant="secondary">
+                            Close
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">100 SALES + $1,000</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <p>XM MEAL PREP</p>{" "}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">
+                        <Share />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Share link</DialogTitle>
+                        <DialogDescription>
+                          Anyone who has this link will be able to view this.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="flex items-center space-x-2">
+                        <div className="grid flex-1 gap-2">
+                          <Label htmlFor="link" className="sr-only">
+                            Link
+                          </Label>
+                          <Input
+                            id="link"
+                            defaultValue="https://ui.shadcn.com/docs/installation"
+                            readOnly
+                          />
+                        </div>
+                        <Button type="submit" size="sm" className="px-3">
+                          <span className="sr-only">Copy</span>
+                          <Copy />
+                        </Button>
+                      </div>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                          <Button type="button" variant="secondary">
+                            Close
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">1200 SALES +$5,730</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <p>Total Sales</p>{" "}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">
+                        <Share />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Share link</DialogTitle>
+                        <DialogDescription>
+                          Anyone who has this link will be able to view this.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="flex items-center space-x-2">
+                        <div className="grid flex-1 gap-2">
+                          <Label htmlFor="link" className="sr-only">
+                            Link
+                          </Label>
+                          <Input
+                            id="link"
+                            defaultValue="https://www.brixpages.com/xmfitness"
+                            readOnly
+                          />
+                        </div>
+                        <Button type="submit" size="sm" className="px-3">
+                          <span className="sr-only">Copy</span>
+                          <Copy />
+                        </Button>
+                      </div>
+                      <DialogFooter className="sm:justify-start">
+                        <DialogClose asChild>
+                          <Button type="button" variant="secondary">
+                            Close
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">1300 SALES +$6,730</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">BOOST</h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <div className="flex items-center gap-4 text-lg font-medium ml-2">
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle>Boosted Vistors</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">
+                  (+1,200) 72% more vistors since boosted.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle>Boosted Joined</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">
+                  (+800) 92% more joined since boosted.
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle>Boosted Sales</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">
+                  800 sales, +$5,000 since boosted.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">CMS</h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <div className="flex items-center gap-4 text-lg font-medium ml-2">
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Services{" "}
+                  <Button variant="outline">
+                    <Pencil />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">3</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  Forms{" "}
+                  <Button variant="outline">
+                    <Pencil />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">2</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  FAQ'S{" "}
+                  <Button variant="outline">
+                    <Pencil />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">12</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2">TEAM</h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <div className="flex items-center gap-4 text-lg font-medium ml-2">
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  ROLES{" "}
+                  <Button variant="outline">
+                    <Plus />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">3</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  PERMISSIONS{" "}
+                  <Button variant="outline">
+                    <Plus />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">0</p>
+              </CardContent>
+            </Card>
+            <Card className="w-1/3">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  INVITES{" "}
+                  <Button variant="outline">
+                    <Plus />
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="flex items-center">2</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
