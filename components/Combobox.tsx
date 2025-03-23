@@ -21,16 +21,16 @@ import {
 
 const frameworks = [
   {
-    value: "monthly",
-    label: "Monthly",
+    value: "today",
+    label: "Today",
   },
   {
     value: "weekly",
-    label: "Weekly",
+    label: "Last 7 days",
   },
   {
-    value: "daily",
-    label: "Daily",
+    value: "monthly",
+    label: "Last 30 days",
   },
 ];
 
@@ -49,7 +49,7 @@ export function ComboboxDemo() {
         >
           {value
             ? frameworks.find((framework) => framework.value === value)?.label
-            : "Monthly"}
+            : "Today"}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>

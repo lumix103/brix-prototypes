@@ -54,6 +54,7 @@ import {
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { SectionCards } from "@/components/section-cards";
 import { Badge } from "@/components/ui/badge";
+import { TableDemo } from "@/components/tabledemo";
 const chartData = [
   { month: "January", desktop: 186 },
   { month: "February", desktop: 305 },
@@ -70,7 +71,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function Dashboard() {
-  const [activeTab, setActiveTab] = useState("AUTOMATIONS");
+  const [activeTab, setActiveTab] = useState("SALES");
 
   return (
     <div className="flex h-screen bg-gray-100">
@@ -147,95 +148,15 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Marketing Tools Section */}
+        {/* Posting Section */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold mb-2 uppercase">
-            Your Key Stats for the <ComboboxDemo />
-          </h2>
-          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <h2 className="text-xl font-bold mb-2">SALES</h2>
 
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
           <div className="flex items-center gap-4 text-lg font-medium ml-2">
             <Card className="w-1/4">
               <CardHeader className="relative">
-                <CardDescription>Site Sessions</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  150
-                </CardTitle>
-                <div className="absolute right-4 top-4">
-                  <Badge
-                    variant="outline"
-                    className="flex gap-1 rounded-lg text-xs"
-                  >
-                    <TrendingDownIcon className="size-3" />
-                    -11%
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Down this month{" "}
-                  <TrendingDownIcon className="size-4" />
-                </div>
-                <div className="text-muted-foreground">
-                  Sessions for the last month.
-                </div>
-              </CardFooter>
-            </Card>
-
-            <Card className="w-1/4">
-              <CardHeader className="relative">
-                <CardDescription>Form Submissions</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  150
-                </CardTitle>
-                <div className="absolute right-4 top-4">
-                  <Badge
-                    variant="outline"
-                    className="flex gap-1 rounded-lg text-xs"
-                  >
-                    <TrendingDownIcon className="size-3" />
-                    -50.5%
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Down this month{" "}
-                  <TrendingDownIcon className="size-4" />
-                </div>
-                <div className="text-muted-foreground">
-                  Form Submissions for the last month.
-                </div>
-              </CardFooter>
-            </Card>
-            <Card className="w-1/4">
-              <CardHeader className="relative">
-                <CardDescription>Vistors</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  327
-                </CardTitle>
-                <div className="absolute right-4 top-4">
-                  <Badge
-                    variant="outline"
-                    className="flex gap-1 rounded-lg text-xs"
-                  >
-                    <TrendingUpIcon className="size-3" />
-                    +5%
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending up this month <TrendingUpIcon className="size-4" />
-                </div>
-                <div className="text-muted-foreground">
-                  Visitors for the last month.
-                </div>
-              </CardFooter>
-            </Card>
-            <Card className="w-1/4">
-              <CardHeader className="relative">
-                <CardDescription>Joined</CardDescription>
+                <CardDescription>Today</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
                   13
                 </CardTitle>
@@ -244,35 +165,46 @@ export default function Dashboard() {
                     variant="outline"
                     className="flex gap-1 rounded-lg text-xs"
                   >
-                    <TrendingDownIcon className="size-3" />
-                    -2%
+                    <TrendingUpIcon className="size-3" />
+                    1%
                   </Badge>
                 </div>
               </CardHeader>
               <CardFooter className="flex-col items-start gap-1 text-sm">
                 <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending up this month <TrendingUpIcon className="size-4" />
+                  Trending Up this day <TrendingUpIcon className="size-4" />
                 </div>
-                <div className="text-muted-foreground">
-                  Joined for the last month.
-                </div>
+                <div className="text-muted-foreground">Today's sales.</div>
               </CardFooter>
             </Card>
-          </div>
-        </div>
-        <div className="mb-8">
-          <ChartAreaInteractive />
-        </div>
-        {/* Posting Section */}
-        <div className="mb-8">
-          <h2 className="text-xl font-bold mb-2">SALES</h2>
-          <div className="h-px bg-gray-800 w-full mb-4"></div>
-          <div className="flex items-center gap-4 text-lg font-medium ml-2">
-            <Card className="w-1/3">
+            <Card className="w-1/4">
               <CardHeader className="relative">
-                <CardDescription>XM FITNESS COURSE</CardDescription>
+                <CardDescription>Last 7 days</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  100 units sold, +$1000
+                  135
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingUpIcon className="size-3" />
+                    7%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex-col items-start gap-1 text-sm">
+                <div className="line-clamp-1 flex gap-2 font-medium">
+                  Trending Up this week <TrendingUpIcon className="size-4" />
+                </div>
+                <div className="text-muted-foreground">Last 7 days sales.</div>
+              </CardFooter>
+            </Card>
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>Last 30 days</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  1350
                 </CardTitle>
                 <div className="absolute right-4 top-4">
                   <Badge
@@ -288,41 +220,14 @@ export default function Dashboard() {
                 <div className="line-clamp-1 flex gap-2 font-medium">
                   Trending Up this month <TrendingUpIcon className="size-4" />
                 </div>
-                <div className="text-muted-foreground">
-                  XM FITNESS COURSE for the last month.
-                </div>
+                <div className="text-muted-foreground">Month's sales.</div>
               </CardFooter>
             </Card>
-            <Card className="w-1/3">
-              <CardHeader className="relative">
-                <CardDescription>XM MEAL PLAN</CardDescription>
-                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  1200 units sold, +$5730
-                </CardTitle>
-                <div className="absolute right-4 top-4">
-                  <Badge
-                    variant="outline"
-                    className="flex gap-1 rounded-lg text-xs"
-                  >
-                    <TrendingUpIcon className="size-3" />
-                    10%
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Up this month <TrendingUpIcon className="size-4" />
-                </div>
-                <div className="text-muted-foreground">
-                  XM MEAL PLAN for the last month.
-                </div>
-              </CardFooter>
-            </Card>
-            <Card className="w-1/3">
+            <Card className="w-1/4">
               <CardHeader className="relative">
                 <CardDescription>Total Sales</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  1300 units sold, $6730
+                  1350
                 </CardTitle>
                 <div className="absolute right-4 top-4">
                   <Badge
@@ -336,25 +241,30 @@ export default function Dashboard() {
               </CardHeader>
               <CardFooter className="flex-col items-start gap-1 text-sm">
                 <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Up this month <TrendingUpIcon className="size-4" />
+                  Trending Up overall <TrendingUpIcon className="size-4" />
                 </div>
-                <div className="text-muted-foreground">
-                  Total Sales for the last month.
-                </div>
+                <div className="text-muted-foreground">Total sales.</div>
               </CardFooter>
             </Card>
           </div>
+        </div>
+        <div className="mb-8 bg-white rounded-lg p-4">
+          <h2 className="text-xl font-bold mb-2">Orders</h2>
+          <div className="h-px bg-gray-800 w-full mb-4"></div>
+          <TableDemo />
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-bold mb-2">BOOST</h2>
+          <h2 className="text-xl font-bold mb-2 uppercase">
+            Offer Sales <ComboboxDemo />
+          </h2>
           <div className="h-px bg-gray-800 w-full mb-4"></div>
           <div className="flex items-center gap-4 text-lg font-medium ml-2">
-            <Card className="w-1/3">
+            <Card className="w-1/4">
               <CardHeader className="relative">
-                <CardDescription>Boosted Sales</CardDescription>
+                <CardDescription>XM FITNESS COURSE</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  (+800 sales), +$5,000 more sold since boosted.
+                  245
                 </CardTitle>
                 <div className="absolute right-4 top-4">
                   <Badge
@@ -362,24 +272,29 @@ export default function Dashboard() {
                     className="flex gap-1 rounded-lg text-xs"
                   >
                     <TrendingUpIcon className="size-3" />
-                    10%
+                    15%
                   </Badge>
                 </div>
               </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Up this month <TrendingUpIcon className="size-4" />
+              <CardFooter className="flex justify-between items-start gap-1 text-sm">
+                <div className="flex flex-col gap-1">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    Most Popular Course <TrendingUpIcon className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground">
+                    Monthly enrollments
+                  </div>
                 </div>
-                <div className="text-muted-foreground">
-                  Boosted Sales for the last month.
-                </div>
+                <Button variant="outline" className="mt-2 self-end">
+                  <Pencil className="mr-2 h-4 w-4" /> Edit
+                </Button>
               </CardFooter>
             </Card>
-            <Card className="w-1/3">
+            <Card className="w-1/4">
               <CardHeader className="relative">
-                <CardDescription>Boosted Joined</CardDescription>
+                <CardDescription>XM MEAL PLAN</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  (+800) 92% more joined since boosted.
+                  189
                 </CardTitle>
                 <div className="absolute right-4 top-4">
                   <Badge
@@ -387,24 +302,27 @@ export default function Dashboard() {
                     className="flex gap-1 rounded-lg text-xs"
                   >
                     <TrendingUpIcon className="size-3" />
-                    10%
+                    12%
                   </Badge>
                 </div>
               </CardHeader>
-              <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Up this month <TrendingUpIcon className="size-4" />
+              <CardFooter className="flex justify-between items-start gap-1 text-sm">
+                <div className="flex flex-col gap-1">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    Growing Subscription <TrendingUpIcon className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground">Active meal plans</div>
                 </div>
-                <div className="text-muted-foreground">
-                  Boosted Joined for the last month.
-                </div>
+                <Button variant="outline" className="mt-2 self-end">
+                  <Pencil className="mr-2 h-4 w-4" /> Edit
+                </Button>
               </CardFooter>
             </Card>
-            <Card className="w-1/3">
+            <Card className="w-1/4">
               <CardHeader className="relative">
-                <CardDescription>Boosted Vistors</CardDescription>
+                <CardDescription>XM COACHING</CardDescription>
                 <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                  (+800) 92% more vistors since boosted.
+                  78
                 </CardTitle>
                 <div className="absolute right-4 top-4">
                   <Badge
@@ -412,109 +330,44 @@ export default function Dashboard() {
                     className="flex gap-1 rounded-lg text-xs"
                   >
                     <TrendingUpIcon className="size-3" />
-                    10%
+                    25%
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardFooter className="flex justify-between items-start gap-1 text-sm">
+                <div className="flex flex-col gap-1">
+                  <div className="line-clamp-1 flex gap-2 font-medium">
+                    Premium Service Growth <TrendingUpIcon className="size-4" />
+                  </div>
+                  <div className="text-muted-foreground">Active clients</div>
+                </div>
+                <Button variant="outline" className="mt-2 self-end">
+                  <Pencil className="mr-2 h-4 w-4" /> Edit
+                </Button>
+              </CardFooter>
+            </Card>
+            <Card className="w-1/4">
+              <CardHeader className="relative">
+                <CardDescription>BOOSTED SALES</CardDescription>
+                <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
+                  $24,850
+                </CardTitle>
+                <div className="absolute right-4 top-4">
+                  <Badge
+                    variant="outline"
+                    className="flex gap-1 rounded-lg text-xs"
+                  >
+                    <TrendingUpIcon className="size-3" />
+                    18%
                   </Badge>
                 </div>
               </CardHeader>
               <CardFooter className="flex-col items-start gap-1 text-sm">
-                <div className="line-clamp-1 flex gap-2 font-medium">
-                  Trending Up this month <TrendingUpIcon className="size-4" />
-                </div>
-                <div className="text-muted-foreground">
-                  Boosted Vistors for the last month.
+                <div className="flex gap-2">
+                  <Button variant="outline">See More</Button>
+                  <Button>Boost</Button>
                 </div>
               </CardFooter>
-            </Card>
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <h2 className="text-xl font-bold mb-2">CMS</h2>
-          <div className="h-px bg-gray-800 w-full mb-4"></div>
-          <div className="flex items-center gap-4 text-lg font-medium ml-2">
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  Services{" "}
-                  <Button variant="outline">
-                    <Pencil />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">3</p>
-              </CardContent>
-            </Card>
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  Forms{" "}
-                  <Button variant="outline">
-                    <Pencil />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">2</p>
-              </CardContent>
-            </Card>
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  FAQ'S{" "}
-                  <Button variant="outline">
-                    <Pencil />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">12</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-        <div className="mb-8">
-          <h2 className="text-xl font-bold mb-2">TEAM</h2>
-          <div className="h-px bg-gray-800 w-full mb-4"></div>
-          <div className="flex items-center gap-4 text-lg font-medium ml-2">
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  ROLES{" "}
-                  <Button variant="outline">
-                    <Plus />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">3</p>
-              </CardContent>
-            </Card>
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  PERMISSIONS{" "}
-                  <Button variant="outline">
-                    <Plus />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">0</p>
-              </CardContent>
-            </Card>
-            <Card className="w-1/3">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  INVITES{" "}
-                  <Button variant="outline">
-                    <Plus />
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="flex items-center">2</p>
-              </CardContent>
             </Card>
           </div>
         </div>
